@@ -127,7 +127,7 @@ body {
 }
 
 .card:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
   box-shadow: 2px 2px 14px #00000020;
 }
 
@@ -152,6 +152,12 @@ body {
   display: block;
   margin: 0;
   padding: 0;
+}
+
+.card-name {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
 }
 
 .card-name a {
