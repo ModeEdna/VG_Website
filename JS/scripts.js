@@ -94,6 +94,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Start automatic scrolling
+  cardContainer.addEventListener("mouseover", () => {
+    scrollSpeed = 0.5; // Reduce speed when hovering over the card container
+  });
+
+  cardContainer.addEventListener("mouseout", () => {
+    scrollSpeed = 1.5; // Restore original speed when not hovering over the card container
+  });
   function startAutoScroll() {
     scrollInterval = setInterval(autoScrollCards, 20); // Adjust interval as needed
   }
@@ -134,10 +141,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Scroll the card container left or right
   leftButton.addEventListener("click", () => {
+    stopAutoScroll();
     cardContainer.scrollLeft -= 1000; // Adjust scroll amount as needed
   });
 
   rightButton.addEventListener("click", () => {
+    stopAutoScroll();
     cardContainer.scrollLeft += 1000; // Adjust scroll amount as needed
   });
 
@@ -168,15 +177,5 @@ document.addEventListener("DOMContentLoaded", function () {
         button.classList.remove("visible");
       });
     }
-  });
-
-  // Reduce scroll speed when hovering over a card
-  cards.forEach((card) => {
-    card.addEventListener("mouseover", () => {
-      scrollSpeed = 0.5; // Reduce speed to 1/10 of original
-    });
-    card.addEventListener("mouseout", () => {
-      scrollSpeed = 1.5; // Restore original speed
-    });
   });
 });
