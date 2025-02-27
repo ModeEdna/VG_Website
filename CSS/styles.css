@@ -78,6 +78,19 @@ body {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+.overlay-text {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px; /* Adjust size as needed */
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional: Add shadow for better readability */
+  font-weight: bold;
+  z-index: 10; /* Ensure it overlays the video */
+  text-align: center;
+}
+
 /* Lower section styles */
 .lowerLP {
   background-color: rgb(245, 245, 245);
@@ -320,5 +333,20 @@ body {
   .card {
     height: 6rem;
     width: 4.5rem;
+  }
+}
+
+/* align list to the right once width reaches 1350*/
+@media (max-width: 1350px) {
+  .navbar ul {
+    margin-left: auto; /* Push the list to the right */
+  }
+
+  .navbar li {
+    margin: 0; /* Decrease spacing between list items */
+  }
+
+  .navbar li:last-child {
+    margin-right: 20px; /* Add space between last item and right edge */
   }
 }

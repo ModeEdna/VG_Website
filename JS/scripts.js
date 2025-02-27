@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const carouselTimer = document.createElement("div");
   carouselTimer.classList.add("carousel-timer");
   document.querySelector(".carousel-container").appendChild(carouselTimer);
+  const overlayText = document.querySelector(".overlay-text");
   let imageWidth;
   let currentIndex = 0;
   let carouselInterval;
@@ -33,6 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
       indicator.classList.toggle("active", index === currentIndex);
     });
     resetCarouselTimer();
+    // Show or hide overlay text based on the current slide
+    if (currentIndex === 0) {
+      overlayText.style.display = "block";
+    } else {
+      overlayText.style.display = "none";
+    }
   }
 
   // Calculate the height of the upper section based on the aspect ratio of the first image
