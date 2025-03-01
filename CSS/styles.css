@@ -51,11 +51,16 @@ body {
 
 body {
   height: 100%;
+  padding-top: var(
+    --navbar-height
+  ); /* Add padding to account for fixed navbar */
 }
 
 .container {
   display: flex;
-  height: 100%;
+  height: calc(
+    100% - var(--navbar-height)
+  ); /* Adjust height to account for navbar */
   width: 100%;
   background-color: tomato;
   flex-direction: column;
@@ -292,6 +297,7 @@ body {
   align-items: center;
   justify-content: center;
   border-bottom: 4px solid var(--primary-color);
+  box-sizing: border-box; /* Include border in element's total height */
 }
 
 .navbar-logo {
@@ -421,6 +427,7 @@ body {
 .admin-cards {
   background-color: var(--bg-cards);
   padding: var(--space-md);
+  padding-top: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
