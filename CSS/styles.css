@@ -1,10 +1,52 @@
+/* CSS Variables */
+:root {
+  /* Colors */
+  --primary-color: #ef3415;
+  --text-color: #2b3240;
+  --bg-light: #f1f1f1;
+  --bg-white: #ffffff;
+  --bg-carousel: rgba(100, 150, 50, 0.5);
+  --bg-cards: rgb(245, 245, 245);
+  --scroll-btn-color: rgb(156, 156, 160);
+  --scroll-btn-bg: rgba(231, 231, 236, 0.8);
+  --scroll-btn-hover: rgba(210, 210, 215, 0.8);
+  --shadow-light: rgba(0, 0, 0, 0.08);
+  --shadow-medium: rgba(0, 0, 0, 0.12);
+  --indicator-inactive: rgba(255, 255, 255, 0.4);
+  --indicator-active: rgba(255, 255, 255, 0.8);
+
+  /* Spacing */
+  --space-xs: 5px;
+  --space-sm: 10px;
+  --space-md: 20px;
+  --space-lg: 30px;
+
+  /* Typography */
+  --font-family: "Roboto", sans-serif;
+  --font-size-normal: 18px;
+  --font-size-small: 14px;
+  --font-size-large: 48px;
+
+  /* Animation */
+  --transition-standard: 0.3s ease;
+  --transition-long: width 30s linear;
+
+  /* Dimensions */
+  --navbar-height: 60px;
+  --border-radius: 1rem;
+  --indicator-size: 15px;
+  --card-width: 18rem;
+  --card-height: 24rem;
+  --scroll-button-size: 50px;
+}
+
 /* General styles */
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Roboto";
+  font-family: var(--font-family);
 }
 
 body {
@@ -21,7 +63,7 @@ body {
 
 /* Upper section styles */
 .upperLP {
-  background-color: rgba(100, 150, 50, 0.5);
+  background-color: var(--bg-carousel);
   flex: 3;
   position: relative;
   overflow: hidden;
@@ -38,9 +80,9 @@ body {
   bottom: 0;
   left: 0;
   height: 4px;
-  background-color: #ef3415;
+  background-color: var(--primary-color);
   width: 0;
-  transition: width 30s linear; /* Adjust duration to match the timer */
+  transition: var(--transition-long);
 }
 
 .carousel-images {
@@ -59,23 +101,23 @@ body {
 
 .carousel-indicators {
   position: absolute;
-  bottom: 20px;
+  bottom: var(--space-md);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
 }
 
 .indicator {
-  width: 15px;
-  height: 15px;
+  width: var(--indicator-size);
+  height: var(--indicator-size);
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.4);
-  margin: 0 5px;
+  background-color: var(--indicator-inactive);
+  margin: 0 var(--space-xs);
   cursor: pointer;
 }
 
 .indicator.active {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--indicator-active);
 }
 
 .overlay-text {
@@ -83,52 +125,72 @@ body {
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 48px; /* Adjust size as needed */
+  font-size: var(--font-size-large);
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional: Add shadow for better readability */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   font-weight: bold;
-  z-index: 10; /* Ensure it overlays the video */
+  z-index: 10;
   text-align: center;
 }
 
 /* Lower section styles */
 .lowerLP {
-  background-color: rgb(245, 245, 245);
+  background-color: var(--bg-cards);
   flex: 2;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  white-space: nowrap;
+  overflow-y: visible; /* Change from hidden to visible */
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-md);
+}
+
+.lowerLP h2 {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  white-space: normal;
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 4rem); /* Make room for the header */
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
+  overflow: visible; /* Ensure wrapper allows overflow to be visible */
 }
 
 .card-container {
+  width: 100%;
+  height: 100%;
   align-items: center;
   overflow-x: auto;
+  overflow-y: visible; /* Allow vertical overflow */
+  white-space: nowrap;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
 .card {
-  background-color: #ffffff;
-  padding: 20px;
-  margin: 10px;
-  border-radius: 1rem;
+  background-color: var(--bg-white);
+  padding: var(--space-md);
+  margin: var(--space-sm);
+  border-radius: var(--border-radius);
   display: inline-block;
-  height: 24rem;
-  width: 18rem;
-  box-shadow: 2px 4px 12px #00000014;
+  height: var(--card-height);
+  width: var(--card-width);
+  box-shadow: 2px 4px 12px var(--shadow-light);
   border: 1px solid transparent;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform var(--transition-standard),
+    box-shadow var(--transition-standard);
 }
 
 .card:hover {
   transform: scale(1.03);
-  box-shadow: 2px 2px 14px #00000020;
+  box-shadow: 2px 2px 14px var(--shadow-medium);
 }
 
 .card-content {
@@ -143,7 +205,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-md);
 }
 
 .card-icon img {
@@ -171,19 +233,23 @@ body {
 }
 
 .scroll-button {
-  color: rgb(156, 156, 160);
-  background-color: rgba(231, 231, 236, 0.8);
+  color: var(--scroll-btn-color);
+  background-color: var(--scroll-btn-bg);
   border: none;
-  padding: 10px 15px;
+  padding: var(--space-sm) var(--space-md);
   font-size: 1.2em;
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%) scale(0.8);
-  z-index: 10;
+  z-index: 100; /* Increased z-index to ensure it's clickable */
   border-radius: 50%;
-  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.5s ease;
+  transition: opacity var(--transition-standard),
+    transform var(--transition-standard),
+    background-color var(--transition-standard);
   opacity: 0;
+  pointer-events: auto; /* Ensure clicks are registered */
+  z-index: 100; /* Ensure the button is above other elements */
 }
 
 .scroll-button.visible {
@@ -192,19 +258,19 @@ body {
 }
 
 .scroll-button:hover {
-  background-color: rgba(210, 210, 215, 0.8);
+  background-color: var(--scroll-btn-hover);
 }
 
 .left-button {
-  left: 30px;
-  height: 50px;
-  width: 50px;
+  left: var(--space-lg);
+  height: var(--scroll-button-size);
+  width: var(--scroll-button-size);
 }
 
 .right-button {
-  right: 30px;
-  height: 50px;
-  width: 50px;
+  right: var(--space-lg);
+  height: var(--scroll-button-size);
+  width: var(--scroll-button-size);
 }
 
 .card-container::-webkit-scrollbar {
@@ -213,24 +279,24 @@ body {
 
 /* Navbar styles */
 .navbar {
-  background-color: #f1f1f1;
-  color: #2b3240;
-  padding: 10px 20px;
+  background-color: var(--bg-light);
+  color: var(--text-color);
+  padding: var(--space-sm) var(--space-md);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  height: 60px;
+  height: var(--navbar-height);
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the items horizontally */
-  border-bottom: 4px solid #ef3415;
+  justify-content: center;
+  border-bottom: 4px solid var(--primary-color);
 }
 
 .navbar-logo {
   position: absolute;
-  left: 20px; /* Adjust as needed */
+  left: var(--space-md);
 }
 
 .navbar-logo img {
@@ -245,25 +311,24 @@ body {
 }
 
 .navbar li {
-  margin: 0 20px;
+  margin: 0 var(--space-md);
 }
 
 .navbar a {
-  color: #2b3240;
+  color: var(--text-color);
   text-decoration: none;
   padding: 8px 16px;
   border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: "Roboto", Sans-serif;
-  font-size: 18px;
+  transition: color var(--transition-standard);
+  font-family: var(--font-family);
+  font-size: var(--font-size-normal);
   font-weight: 400;
   text-transform: uppercase;
 }
 
 .navbar a:hover,
 .dropdown-button:hover {
-  color: #ef3415;
-  transition: color 0.3s ease;
+  color: var(--primary-color);
 }
 
 .dropdown-container {
@@ -274,11 +339,11 @@ body {
   background: none;
   border: none;
   padding: 8px 16px;
-  font-family: "Roboto", Sans-serif;
-  font-size: 18px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-normal);
   font-weight: 400;
   text-transform: uppercase;
-  color: #2b3240;
+  color: var(--text-color);
   cursor: pointer;
 }
 
@@ -288,27 +353,22 @@ body {
   min-width: 160px;
   z-index: 1;
   top: 100%;
-  background-color: #f1f1f1; /* Match navbar background */
-  /* border-top: 2px solid #ef3415; */
+  background-color: var(--bg-light);
 }
 
 .dropdown-content a {
-  color: #2b3240;
+  color: var(--text-color);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  font-size: 14px;
+  font-size: var(--font-size-small);
 }
 
 .dropdown-content a:hover {
-  color: #ef3415;
-  transition: color 0.3s ease;
+  color: var(--primary-color);
 }
 
-.dropdown-container.show .dropdown-content {
-  display: block;
-}
-
+.dropdown-container.show .dropdown-content,
 .dropdown-container:hover .dropdown-content {
   display: block;
 }
@@ -345,14 +405,104 @@ body {
 /* align list to the right once width reaches 1350*/
 @media (max-width: 1350px) {
   .navbar ul {
-    margin-left: auto; /* Push the list to the right */
+    margin-left: auto;
   }
 
   .navbar li {
-    margin: 0; /* Decrease spacing between list items */
+    margin: 0;
   }
 
   .navbar li:last-child {
-    margin-right: 20px; /* Add space between last item and right edge */
+    margin-right: var(--space-md);
   }
+}
+
+/* Admin cards section styles */
+.admin-cards {
+  background-color: var(--bg-cards);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: -2rem;
+}
+
+.admin-cards h2 {
+  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-top: 3rem;
+}
+
+.admin-card-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.admin-card-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.admin-card {
+  background-color: var(--bg-white);
+  padding: var(--space-md);
+  margin: var(--space-sm);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px; /* Adjust the width as needed */
+  height: auto; /* Allow the card to expand based on content */
+  min-height: 200px; /* Minimum height */
+  max-height: 300px; /* Maximum height to maintain consistency */
+  box-shadow: 2px 4px 12px var(--shadow-light);
+  border: 1px solid transparent;
+  transition: transform var(--transition-standard),
+    box-shadow var(--transition-standard);
+}
+
+.admin-card:hover {
+  transform: scale(1.03);
+  box-shadow: 2px 2px 14px var(--shadow-medium);
+}
+
+.admin-card-icon {
+  margin-bottom: var(--space-md); /* Reduce spacing between icon and title */
+}
+
+.admin-card-icon img {
+  max-height: 50px;
+  width: auto;
+  display: block;
+}
+
+.admin-card-name {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: var(--space-md);
+}
+
+.admin-card-name a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+}
+
+.admin-card-name a:hover {
+  text-decoration: underline;
+}
+
+.admin-card-description {
+  font-size: var(--font-size-small);
+  color: var(--text-color);
+  text-align: center;
+  line-height: 1.5;
+  margin-top: var(--space-sm);
+  white-space: normal; /* Allow text to wrap */
+  overflow: hidden; /* Prevent overflow */
+  width: 100%; /* Ensure the description uses the full width of the card */
 }

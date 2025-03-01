@@ -12,6 +12,7 @@
     />
     <link rel="stylesheet" href="CSS/styles.css" />
     <script src="JS/scripts.js" defer></script>
+    <script src="JS/scroll-fix.js"></script>
   </head>
   <body>
     <div class="container">
@@ -71,8 +72,9 @@
 
       <!-- Lower section with cards -->
       <div class="lowerLP">
-        <button class="scroll-button left-button">&lt;</button>
+        <h2>Your Products</h2>
         <div class="card-container">
+          <button class="scroll-button left-button">&lt;</button>
           <!-- Cards -->
           <div class="card">
             <div class="card-content">
@@ -167,6 +169,52 @@
           </div>
         </div>
         <button class="scroll-button right-button">&gt;</button>
+      </div>
+    </div>
+
+    <!-- Adding a section for the admin cards -->
+    <div class="admin-cards">
+      <h2>Admin Products</h2>
+      <div class="admin-card-container">
+        <div class="admin-card">
+          <div class="admin-card-icon">
+            <img src="Assets/online-shop-2.png" alt="Admin Icon" />
+          </div>
+          <div class="admin-card-name">
+            <a href="https://www.google.com">Admin Dashboard</a>
+          </div>
+          <div class="admin-card-description">
+            Complete administrative control panel for managing users,
+            permissions, and content. Provides real-time analytics and reporting
+            features for system oversight.
+          </div>
+        </div>
+        <div class="admin-card">
+          <div class="admin-card-icon">
+            <img src="Assets/business.png" alt="Admin Icon" />
+          </div>
+          <div class="admin-card-name">
+            <a href="https://www.google.com">User Management</a>
+          </div>
+          <div class="admin-card-description">
+            Comprehensive tool for managing user accounts, roles, and access
+            levels. Streamlines onboarding processes and ensures proper security
+            protocols.
+          </div>
+        </div>
+        <div class="admin-card">
+          <div class="admin-card-icon">
+            <img src="Assets/cooperation.png" alt="Admin Icon" />
+          </div>
+          <div class="admin-card-name">
+            <a href="https://www.google.com">System Configuration</a>
+          </div>
+          <div class="admin-card-description">
+            Advanced configuration toolkit for customizing system parameters and
+            optimizing performance. Includes backup and restoration utilities
+            for data protection.
+          </div>
+        </div>
       </div>
     </div>
   </body>
