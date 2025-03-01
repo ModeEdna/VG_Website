@@ -1,119 +1,68 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Get needed elements
-  const cardContainer = document.querySelector(".card-container");
-  const leftButton = document.querySelector(".left-button");
-  const rightButton = document.querySelector(".right-button");
+  // Setup scroll buttons for all card container sections
+  const sections = document.querySelectorAll(".admin-cards");
 
-  // Store original auto-scroll state
-  let wasAutoScrolling = false;
+  sections.forEach((section) => {
+    const cardContainer = section.querySelector(".team-card-container");
+    const leftButton = section.querySelector(".left-button");
+    const rightButton = section.querySelector(".right-button");
 
-  // Reference to the auto-scroll interval from the original script
-  let originalScrollInterval;
+    // Reset scroll position to start (to make first cards visible)
+    cardContainer.scrollLeft = 0;
 
-  // Find the interval that's moving the card container
-  function findAutoScrollInterval() {
-    // Look for all intervals that might be modifying scrollLeft
-    const initialScrollLeft = cardContainer.scrollLeft;
+    // Calculate card width and appropriate scroll amount
+    const firstCard = cardContainer.querySelector(".card-about-us");
+    const cardWidth = firstCard
+      ? firstCard.offsetWidth +
+        parseInt(getComputedStyle(firstCard).marginRight)
+      : 300;
+    const scrollAmount = cardWidth * 2; // Scroll by 2 cards at a time
 
-    // Check after a small delay if scrollLeft has changed without user interaction
-    setTimeout(() => {
-      if (cardContainer.scrollLeft !== initialScrollLeft) {
-        wasAutoScrolling = true;
+    rightButton.addEventListener("click", function () {
+      cardContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+
+    leftButton.addEventListener("click", function () {
+      cardContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    // Hide/show scroll buttons based on scroll position
+    function updateButtonVisibility() {
+      // Left button visibility
+      if (cardContainer.scrollLeft <= 0) {
+        leftButton.style.opacity = "0.5";
+        leftButton.style.pointerEvents = "none"; // Disable button when at the start
+      } else {
+        leftButton.style.opacity = "1";
+        leftButton.style.pointerEvents = "auto"; // Enable button
       }
-    }, 100);
 
-    // Look for window-level intervals that might contain the scroll function
-    for (let i = 1; i < 9999; i++) {
-      const tempInterval = window[`setInterval${i}`];
-      if (tempInterval && typeof tempInterval === "function") {
-        originalScrollInterval = i;
+      // Right button visibility
+      if (
+        cardContainer.scrollLeft + cardContainer.clientWidth >=
+        cardContainer.scrollWidth - 10
+      ) {
+        rightButton.style.opacity = "0.5";
+        rightButton.style.pointerEvents = "none"; // Disable button when at the end
+      } else {
+        rightButton.style.opacity = "1";
+        rightButton.style.pointerEvents = "auto"; // Enable button
       }
     }
-  }
 
-  // Force stop auto-scrolling temporarily
-  function pauseAutoScroll() {
-    // Get access to original script's scope
-    if (window.stopAutoScroll) {
-      wasAutoScrolling = true;
-      window.stopAutoScroll();
+    // Add scroll event listener
+    cardContainer.addEventListener("scroll", updateButtonVisibility);
+
+    // Initial check for button visibility
+    updateButtonVisibility();
+
+    // Hide buttons if there's nothing to scroll
+    if (cardContainer.scrollWidth <= cardContainer.clientWidth) {
+      leftButton.style.display = "none";
+      rightButton.style.display = "none";
     } else {
-      // Try to clear all possible intervals
-      for (let i = 1; i < 100; i++) {
-        clearInterval(i);
-      }
+      leftButton.style.display = "flex"; // Use flex for better centering
+      rightButton.style.display = "flex";
     }
-  }
-
-  // Resume auto-scrolling if it was active
-  function resumeAutoScroll() {
-    if (wasAutoScrolling && window.startAutoScroll) {
-      setTimeout(() => {
-        window.startAutoScroll();
-      }, 2000); // Wait 2 seconds before resuming
-      wasAutoScrolling = false;
-    }
-  }
-
-  // Enhanced button functionality
-  if (leftButton && rightButton && cardContainer) {
-    // Apply updated click handlers that pause auto-scroll
-    leftButton.addEventListener("click", function (e) {
-      e.stopPropagation();
-      console.log("Left button clicked - pausing auto-scroll");
-
-      // Stop auto-scrolling while we perform manual scroll
-      pauseAutoScroll();
-
-      // Scroll left
-      cardContainer.scrollBy({
-        left: -300,
-        behavior: "smooth",
-      });
-
-      // Resume auto-scrolling after a delay
-      setTimeout(resumeAutoScroll, 2000);
-
-      // Make buttons visible longer
-      leftButton.classList.add("visible");
-      setTimeout(() => {
-        if (!cardContainer.matches(":hover")) {
-          leftButton.classList.remove("visible");
-        }
-      }, 3000);
-    });
-
-    rightButton.addEventListener("click", function (e) {
-      e.stopPropagation();
-      console.log("Right button clicked - pausing auto-scroll");
-
-      // Stop auto-scrolling while we perform manual scroll
-      pauseAutoScroll();
-
-      // Scroll right
-      cardContainer.scrollBy({
-        left: 300,
-        behavior: "smooth",
-      });
-
-      // Resume auto-scrolling after a delay
-      setTimeout(resumeAutoScroll, 2000);
-
-      // Make buttons visible longer
-      rightButton.classList.add("visible");
-      setTimeout(() => {
-        if (!cardContainer.matches(":hover")) {
-          rightButton.classList.remove("visible");
-        }
-      }, 3000);
-    });
-
-    // Make window functions available to our script
-    if (typeof window.startAutoScroll !== "function") {
-      findAutoScrollInterval();
-    }
-
-    // Log status
-    console.log("Enhanced scroll buttons initialized");
-  }
+  });
 });

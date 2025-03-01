@@ -63,7 +63,7 @@ body {
     100% - var(--navbar-height)
   ); /* Adjust height to account for navbar */
   width: 100%;
-  background-color: tomato;
+  background-color: var(--bg-light);
   flex-direction: column;
 }
 
