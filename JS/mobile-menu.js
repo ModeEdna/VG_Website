@@ -11,24 +11,40 @@ document.addEventListener("DOMContentLoaded", function () {
     this.classList.toggle("active");
     mobileOverlay.classList.toggle("active");
 
+    // Reset all dropdowns when opening/closing the menu
+    mobileDropdownButtons.forEach((button) => {
+      button.parentElement.classList.remove("show");
+    });
+
     // Prevent body scrolling when menu is active
     document.body.style.overflow = this.classList.contains("active")
       ? "hidden"
       : "";
   });
 
-  // Handle mobile dropdown menus
+  // Handle mobile dropdown menus with smooth animation
   mobileDropdownButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      // Toggle this dropdown
-      this.parentElement.classList.toggle("show");
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
 
-      // Close other dropdowns
+      const parent = this.parentElement;
+      const wasActive = parent.classList.contains("show");
+
+      // First close all dropdowns
       mobileDropdownButtons.forEach((otherButton) => {
         if (otherButton !== this) {
           otherButton.parentElement.classList.remove("show");
         }
       });
+
+      // Then toggle this dropdown after a small delay if we're opening
+      // This creates a smoother sequence of animations
+      if (!wasActive) {
+        parent.classList.add("show");
+      } else {
+        parent.classList.remove("show");
+      }
     });
   });
 
@@ -42,5 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
       mobileOverlay.classList.remove("active");
       document.body.style.overflow = "";
     });
+  });
+
+  // Close menu when clicking outside
+  mobileOverlay.addEventListener("click", function (e) {
+    // Only close if clicking directly on the overlay (not its children)
+    if (e.target === this) {
+      hamburger.classList.remove("active");
+      mobileOverlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
   });
 });

@@ -6,10 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const leftButton = document.querySelector(".left-button");
   const rightButton = document.querySelector(".right-button");
   const scrollButtons = document.querySelectorAll(".scroll-button");
-  const dropdownButton = document.querySelector(".dropdown-button");
-  const dropdownContainer = document.querySelector(".dropdown-container");
   const cards = document.querySelectorAll(".card");
   const carouselTimer = document.createElement("div");
+  const overlayText = document.querySelector(".overlay-text");
   carouselTimer.classList.add("carousel-timer");
   document.querySelector(".carousel-container").appendChild(carouselTimer);
   let imageWidth;
@@ -32,6 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
     indicators.forEach((indicator, index) => {
       indicator.classList.toggle("active", index === currentIndex);
     });
+
+    // Toggle overlay text visibility: only show on first slide
+    if (overlayText) {
+      overlayText.style.opacity = currentIndex === 0 ? "1" : "0";
+      overlayText.style.transition = "opacity 0.5s ease";
+    }
+
     resetCarouselTimer();
   }
 
@@ -107,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Initial calculations
-  updateCarousel();
+  updateCarousel(); // This will set the initial state of the overlay text
   calculateUpperLPHeight();
   carouselInterval = setInterval(nextSlide, 30000);
   startAutoScroll();
