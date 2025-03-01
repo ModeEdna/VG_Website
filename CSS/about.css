@@ -130,6 +130,8 @@ button.primary.ghost {
 /* Make sure the cards don't shrink */
 .team-card-container .card-about-us {
   flex: 0 0 auto;
+  width: 342px;
+  height: 245px;
 }
 
 /* Add scroll buttons to team container too */
@@ -251,4 +253,30 @@ button.primary.ghost {
 
 .right-button {
   right: 0;
+}
+
+.bio-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.bio-image-container {
+  flex: 1;
+  max-width: 33%; /* This creates a 1:2 ratio */
+}
+
+.bio-text {
+  flex: 2;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.bio-image-container .round {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
 }

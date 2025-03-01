@@ -13,14 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if (leadershipLeftBtn && leadershipRightBtn && leadershipContainer) {
     leadershipLeftBtn.addEventListener("click", () => {
       leadershipContainer.scrollBy({
-        left: -300,
+        left: -window.innerWidth,
         behavior: "smooth",
       });
     });
 
     leadershipRightBtn.addEventListener("click", () => {
       leadershipContainer.scrollBy({
-        left: 300,
+        left: -window.innerWidth,
         behavior: "smooth",
       });
     });
@@ -34,14 +34,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if (teamLeftBtn && teamRightBtn && teamContainer) {
     teamLeftBtn.addEventListener("click", () => {
       teamContainer.scrollBy({
-        left: -300,
+        left: -window.innerWidth,
         behavior: "smooth",
       });
     });
 
     teamRightBtn.addEventListener("click", () => {
       teamContainer.scrollBy({
-        left: 300,
+        left: window.innerWidth,
         behavior: "smooth",
       });
     });
